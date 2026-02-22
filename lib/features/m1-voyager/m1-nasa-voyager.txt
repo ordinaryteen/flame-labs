@@ -1,0 +1,7 @@
+Kita bakal bikin aplikasi NASA Voyager. Fungsinya simpel tapi "dalem":
+
+Fetch APOD: Narik Astronomy Picture of the Day hari ini dari NASA API.
+
+Time Travel: Fitur buat milih tanggal spesifik (Date Picker) buat ngeliat foto luar angkasa di hari lo lahir atau hari penting lainnya.
+
+Metadata Viewer: Nampilin penjelasan ilmiah di balik foto tersebut.
