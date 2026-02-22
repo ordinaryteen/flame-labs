@@ -1,3 +1,44 @@
+## SKILLSET
+[MENTAL MODELS & PHILOSOPHY]
+- First Principles Thinking: Selalu membedah masalah sampai ke level biner/fisik (No analogies).
+- Hierarchy of Sciences: Memahami penempatan masalah di level hardware vs level aplikasi.
+- The "Giant" Strategy: Fokus pada skalabilitas dan dampak masif.
+- Abstraction Management: Tahu kapan menggunakan library (High-level) dan kapan optimasi manual (Low-level).
+
+[DEEP TECH: SILICON & ATOMIC LOGIC]
+- Process Node Mastery: Paham limitasi fisika & fabrikasi arsitektur (7nm Ryzen 3).
+- Quantum Tunneling Awareness: Memahami fenomena kebocoran elektron pada skala transistor di bawah 5nm.
+- Atomic Floor Limits: Paham batasan fisik material silikon pada angka 0.2nm.
+- Transistor State Logic: Paham struktur fisik Source, Gate, & Drain sebagai saklar biner dasar.
+
+[CPU ARCHITECTURE & EXECUTION]
+- Clock Synchronization: Paham peran Crystal Oscillator & PLL dalam microprocessor.
+- Register Set Management: Pemisahan fisik register User Mode vs Kernel Mode di level sirkuit.
+- Multi-Core Orchestration: Paham eksekusi thread paralel pada fisik core.
+- Instruction Cycle: Paham siklus Fetch-Decode-Execute pada instruksi biner ISA (x86-64).
+- Hardware-Assisted Context Switch: Paham proses otomatis SysPUSH PC & SP ke stack saat interupsi.
+
+[SYSTEM INTERCONNECTS & I/O]
+- Bus Address Management: Paham teknik routing sinyal via Address Bus & Data Bus.
+- Integrated Controller Hub: Paham evolusi integrasi Northbridge & Memory Controller ke dalam die CPU.
+- MMIO Logic: Memetakan register hardware ke dalam ruang alamat memori.
+- DMA Flow: Mekanisme Direct Memory Access untuk transfer data I/O tanpa intervensi CPU core.
+
+[HARDWARE-LEVEL RELIABILITY]
+- Atomic Operations: Identifikasi instruksi tidak aman di level mesin (Race Condition).
+- Physical Memory Awareness: Paham kaitan fisik data di RAM dengan keyword 'volatile'.
+- Hardware Interrupt Flow: Mekanisme IRQ sebagai sinyal fisik pengganti konteks CPU.
+- Thermal & Power Constraints: Kaitan beban kerja (CPU/IO Bursts) dengan manajemen panas die CPU.
+
+[NETWORKING & INFRASTRUCTURE]
+- OSI Model Mastery: Paham fungsi & limitasi Layer 1 sampai Layer 7.
+- Packet Analysis: Anatomi Ethernet Frame, IP Header, hingga TCP Segment.
+- L4 Strategy: Pemilihan TCP (Reliability) vs UDP (Speed).
+- Handshake Logic: Algoritma 3-Way Handshake & Sequence Number tracking.
+- L3 Routing: Routing Table, Next-Hop, & Default Gateway logic.
+- IP Architecture: Subnet Masking biner & transisi IPv4 ke IPv6.
+- Infrastructure Awareness: Peran Cable Landing Station, Repeaters, & Hub Internasional (Singapura).
+
 ## 🛠 THE 4-LAYER WORKFLOW
 Setiap modul akan dijalankan dengan protokol ketat ini:
 
@@ -25,10 +66,10 @@ Setiap modul akan dijalankan dengan protokol ketat ini:
 ## 🧪 THE INDEPENDENT MINI-LABS (Progress Tracker)
 
 ### PHASE 1: THE CORE (Local Machine)
-[ ] MODUL 01: The NASA Voyager (Networking & Syscalls)
-    [ ] L0: Briefing (Understanding OSI Layer & Request Lifecycle)
-    [ ] L1: Mental Gym (Protocol Buffer vs JSON, Logic Flow)
-    [ ] L2: Scalable Scaffold (Repo: `flame-labs/voyager-net`)
+[x] MODUL 01: The NASA Voyager (Networking & Syscalls)
+    [x] L0: Briefing (Understanding OSI Layer & Request Lifecycle)
+    [x] L1: Mental Gym (Protocol Buffer vs JSON, Logic Flow)
+    [x] L2: Scalable Scaffold (Repo: `flame-labs/voyager-net`)
     [ ] L3: Deep Doing (Manual Socket Creation & Syscall Tracing)
     [ ] L4: Hardware Debugger (Tracing NIC to Kernel Buffer)
 
