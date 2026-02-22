@@ -1,175 +1,96 @@
 ## SKILLSET
 [MENTAL MODELS & PHILOSOPHY]
-- First Principles Thinking: Selalu membedah masalah sampai ke level biner/fisik (No analogies).
-- Hierarchy of Sciences: Memahami penempatan masalah di level hardware vs level aplikasi.
-- The "Giant" Strategy: Fokus pada skalabilitas dan dampak masif.
-- Abstraction Management: Tahu kapan menggunakan library (High-level) dan kapan optimasi manual (Low-level).
+- First Principles Thinking: Always dissect problems down to the binary/physical level (No analogies).
+- Hierarchy of Sciences: Understand the placement of problems at the hardware level vs. the application level.
+- The "Giant" Strategy: Focus on scalability and massive impact.
+- Abstraction Management: Know when to use libraries (High-level) and when to optimize manually (Low-level).
 
 [DEEP TECH: SILICON & ATOMIC LOGIC]
-- Process Node Mastery: Paham limitasi fisika & fabrikasi arsitektur (7nm Ryzen 3).
-- Quantum Tunneling Awareness: Memahami fenomena kebocoran elektron pada skala transistor di bawah 5nm.
-- Atomic Floor Limits: Paham batasan fisik material silikon pada angka 0.2nm.
-- Transistor State Logic: Paham struktur fisik Source, Gate, & Drain sebagai saklar biner dasar.
+- Process Node Mastery: Understand the limitations of physics and architectural fabrication (7nm Ryzen 3).
+- Quantum Tunneling Awareness: Understand the phenomenon of electron leakage at transistor scales below 5nm.
+- Atomic Floor Limits: Understand the physical limitations of silicon materials at 0.2nm.
+- Transistor State Logic: Understand the physical structure of Source, Gate, and Drain as a basic binary switch.
 
 [CPU ARCHITECTURE & EXECUTION]
-- Clock Synchronization: Paham peran Crystal Oscillator & PLL dalam microprocessor.
-- Register Set Management: Pemisahan fisik register User Mode vs Kernel Mode di level sirkuit.
-- Multi-Core Orchestration: Paham eksekusi thread paralel pada fisik core.
-- Instruction Cycle: Paham siklus Fetch-Decode-Execute pada instruksi biner ISA (x86-64).
-- Hardware-Assisted Context Switch: Paham proses otomatis SysPUSH PC & SP ke stack saat interupsi.
+- Clock Synchronization: Understand the role of the Crystal Oscillator and PLL in a microprocessor.
+- Register Set Management: The physical separation of User Mode and Kernel Mode registers at the circuit level.
+- Multi-Core Orchestration: Understand parallel thread execution on physical cores.
+- Instruction Cycle: Understand the Fetch-Decode-Execute cycle of binary ISA instructions (x86-64).
+- Hardware-Assisted Context Switch: Understand the automatic process of SysPUSHing PC and SP to the stack upon interruption.
 
 [SYSTEM INTERCONNECTS & I/O]
-- Bus Address Management: Paham teknik routing sinyal via Address Bus & Data Bus.
-- Integrated Controller Hub: Paham evolusi integrasi Northbridge & Memory Controller ke dalam die CPU.
-- MMIO Logic: Memetakan register hardware ke dalam ruang alamat memori.
-- DMA Flow: Mekanisme Direct Memory Access untuk transfer data I/O tanpa intervensi CPU core.
+- Bus Address Management: Understand signal routing techniques via the Address Bus and Data Bus.
+- Integrated Controller Hub: Understand the evolution of Northbridge and Memory Controller integration into the CPU die.
+- MMIO Logic: Mapping hardware registers into memory address space.
+- DMA Flow: A Direct Memory Access mechanism for transferring I/O data without CPU core intervention.
 
 [HARDWARE-LEVEL RELIABILITY]
-- Atomic Operations: Identifikasi instruksi tidak aman di level mesin (Race Condition).
-- Physical Memory Awareness: Paham kaitan fisik data di RAM dengan keyword 'volatile'.
-- Hardware Interrupt Flow: Mekanisme IRQ sebagai sinyal fisik pengganti konteks CPU.
-- Thermal & Power Constraints: Kaitan beban kerja (CPU/IO Bursts) dengan manajemen panas die CPU.
+- Atomic Operations: Identify unsafe instructions at the machine level (Race Condition).
+- Physical Memory Awareness: Understand the physical relationship between data in RAM and the 'volatile' keyword.
+- Hardware Interrupt Flow: The IRQ mechanism acts as a physical signal to replace the CPU context.
+- Thermal & Power Constraints: The relationship between workload (CPU/IO Bursts) and CPU die heat management.
 
 [NETWORKING & INFRASTRUCTURE]
-- OSI Model Mastery: Paham fungsi & limitasi Layer 1 sampai Layer 7.
-- Packet Analysis: Anatomi Ethernet Frame, IP Header, hingga TCP Segment.
-- L4 Strategy: Pemilihan TCP (Reliability) vs UDP (Speed).
-- Handshake Logic: Algoritma 3-Way Handshake & Sequence Number tracking.
+- OSI Model Mastery: Understand the functions and limitations of Layers 1 to 7.
+- Packet Analysis: Anatomy of Ethernet Frames, IP Headers, and TCP Segments.
+- L4 Strategy: Choosing TCP (Reliability) vs. UDP (Speed).
+- Handshake Logic: 3-Way Handshake Algorithm & Sequence Number Tracking.
 - L3 Routing: Routing Table, Next-Hop, & Default Gateway logic.
-- IP Architecture: Subnet Masking biner & transisi IPv4 ke IPv6.
-- Infrastructure Awareness: Peran Cable Landing Station, Repeaters, & Hub Internasional (Singapura).
+- IP Architecture: Binary Subnet Masking & IPv4 to IPv6 Transition.
+- Infrastructure Awareness: The Role of Cable Landing Stations, Repeaters, & International Hubs (Singapore).
 
 ## 🛠 THE 4-LAYER WORKFLOW
-Setiap modul akan dijalankan dengan protokol ketat ini:
+Each module will be executed with this strict protocol:
 
 0. [L0] BRIEFING:
-   - LLM Ngejelasin mau bikin projek apa sebenernya (PRD).
-   - Ekspektasi setelah kelar suatu modul
-1. [L1] MENTAL GYM: 
-   - Konsep First Principles & Big Picture.
-   - Latsol Logika (Non-coding) & Syntax Primer.
-2. [L2] SCALABLE SCAFFOLD: 
-   - Setup folder di repo `flame-labs` (Feature-first).
-   - Git Commit discipline.
+- LLM Explains what the project is actually about (PRD).
+- Expectations after completing a module.
+1. [L1] MENTAL GYM:
+- First Principles & Big Picture Concepts.
+- Latsol Logic (Non-coding) & Syntax Primer.
+2. [L2] SCALABLE SCAFFOLD:
+- Folder Setup in the `flame-labs` repo (Feature-first).
+- Git Commit Discipline.
 3. [L3] DEEP "DOING" (Syntax Mastery):
-   - READ: Pahami anatomi kode.
-   - PREDICT: Tebak output sebelum run.
-   - TYPE: Ketik manual baris per baris (NO COPY-PASTE).
-   - BREAK: Sengaja dirusak buat paham error handling.
-   - DRILL: Modifikasi fitur tanpa panduan.
+- READ: Understand the anatomy of the code.
+- PREDICT: Guess the output before running.
+- TYPE: Type manually line by line (NO COPY-PASTE).
+- BREAK: Intentionally break the code to understand error handling.
+- DRILL: Modify features without guidance.
 4. [L4] HARDWARE DEBUGGER:
-   - Trace elektron dari UI ke Register CPU/Kernel.
-   - Latticework check (menghubungkan ke modul sebelumnya).
+- Trace electrons from the UI to CPU/Kernel Registers.
+- Latticework check (connecting to previous modules).
 
 ---
 
 ## 🧪 THE INDEPENDENT MINI-LABS (Progress Tracker)
 
 ### PHASE 1: THE CORE (Local Machine)
-[x] MODUL 01: The NASA Voyager (Networking & Syscalls)
-    [x] L0: Briefing (Understanding OSI Layer & Request Lifecycle)
-    [x] L1: Mental Gym (Protocol Buffer vs JSON, Logic Flow)
-    [x] L2: Scalable Scaffold (Repo: `flame-labs/voyager-net`)
-    [ ] L3: Deep Doing (Manual Socket Creation & Syscall Tracing)
-    [ ] L4: Hardware Debugger (Tracing NIC to Kernel Buffer)
+[x] MODULE 01: The NASA Voyager (Networking & Syscalls) 
+[x] L0: Briefing (Understanding OSI Layer & Request Lifecycle) 
+[x] L1: Mental Gym (Protocol Buffer vs JSON, Logic Flow) 
+[x] L2: Scalable Scaffold (Repo: `flame-labs/voyager-net`) 
+[ ] L3: Deep Doing (Manual Socket Creation & Syscall Tracing) 
+[ ] L4: Hardware Debugger (Tracing NIC to Kernel Buffer)
 
-[ ] MODUL 02: The Digital Library (Memory & RAM Management)
-    [ ] L0: Briefing (Defining Memory Safety & Pointers)
-    [ ] L1: Mental Gym (Stack vs Heap, Garbage Collection Algorithms)
-    [ ] L2: Scalable Scaffold (Memory Profiling Tooling Setup)
-    [ ] L3: Deep Doing (Simulating Memory Leaks & Manual Deallocation)
-    [ ] L4: Hardware Debugger (RAM Address Space & Page Faults)
+[ ] MODULE 02: The Digital Library (Memory & RAM Management) 
+[ ] L0: Briefing (Defining Memory Safety & Pointers) 
+[ ] L1: Mental Gym (Stack vs Heap, Garbage Collection Algorithms) 
+[ ] L2: Scalable Scaffold (Memory Profiling Tooling Setup) 
+[ ] L3: Deep Doing (Simulating Memory Leaks & Manual Deallocation) 
+[ ] L4: Hardware Debugger (RAM Address Space & Page Faults)
 
-[ ] MODUL 03: The Prime Hunter (Multi-Core CPU & Isolates)
-    [ ] L0: Briefing (Concurrency vs Parallelism Goals)
-    [ ] L1: Mental Gym (Amdahl's Law & Race Conditions)
-    [ ] L2: Scalable Scaffold (Multi-threaded Architecture Setup)
-    [ ] L3: Deep Doing (Isolates Communication & Mutex Implementation)
-    [ ] L4: Hardware Debugger (CPU Core Pinning & Context Switching)
+[ ] MODULE 03: The Prime Hunter (Multi-Core CPU & Isolates) 
+[ ] L0: Briefing (Concurrency vs Parallelism Goals) 
+[ ] L1: Mental Gym (Amdahl's Law & Race Conditions) 
+[ ] L2: Scalable Scaffold (Multi-threaded Architecture Setup) 
+[ ] L3: Deep Doing (Isolates Communication & Mutex Implementation) 
+[ ] L4: Hardware Debugger (CPU Core Pinning & Context Switching)
 
 ### PHASE 2: THE VISUAL LOGIC (Design & UX)
-[ ] MODUL 04: The Synth Component (Atomic Design System)
-    [ ] L0: Briefing (Design Tokens & Component Specs)
-    [ ] L1: Mental Gym (Atomic Design Philosophy)
-    [ ] L2: Scalable Scaffold (Storybook/Widget Gallery Setup)
-    [ ] L3: Deep Doing (Building Primitives from Scratch)
-    [ ] L4: Hardware Debugger (Rendering Pipeline: Constraints to Pixels)
-
-[ ] MODUL 05: The Chef’s Grid (Typography & Visual Hierarchy)
-    [ ] L0: Briefing (Information Architecture & Scaling)
-    [ ] L1: Mental Gym (Golden Ratio & Gestalt Principles)
-    [ ] L2: Scalable Scaffold (Theme Data & Global Styles)
-    [ ] L3: Deep Doing (Manual Grid Systems & Layout Constraints)
-    [ ] L4: Hardware Debugger (Font Rasterization & Subpixel Rendering)
-
-[ ] MODUL 06: The Filter Factory (Asset Pipeline & Texture Caching)
-    [ ] L0: Briefing (Image Optimization & Binary Assets)
-    [ ] L1: Mental Gym (Compression Algorithms & Color Spaces)
-    [ ] L2: Scalable Scaffold (Asset Management Scripting)
-    [ ] L3: Deep Doing (Writing Custom Image Decoders/Filters)
-    [ ] L4: Hardware Debugger (VRAM Allocation & GPU Texture Uploads)
-
-### PHASE 3: THE AI FRONTIER (Intelligence)
-[ ] MODUL 07: The Socrates AI (Agent Integration & Streaming)
-    [ ] L0: Briefing (LLM Latency & UX Challenges)
-    [ ] L1: Mental Gym (Tokenization & Attention Mechanism)
-    [ ] L2: Scalable Scaffold (Streaming API Integration)
-    [ ] L3: Deep Doing (Prompt Engineering & Buffer Management)
-    [ ] L4: Hardware Debugger (NPU/GPU Utilization during Inference)
-
-[ ] MODUL 08: The Taskmaster Agent (Agentic Flow & Function Calling)
-    [ ] L0: Briefing (Defining Autonomy & Tool Use)
-    [ ] L1: Mental Gym (ReAct Pattern & Chain of Thought)
-    [ ] L2: Scalable Scaffold (Action/Tool Dispatcher Setup)
-    [ ] L3: Deep Doing (Recursive Task Execution & Error Correction)
-    [ ] L4: Hardware Debugger (State Persistence & Latency Tracing)
-
-### PHASE 4: THE ENGINEER'S VAULT (SWE & Security)
-[ ] MODUL 09: The Expense Ledger (Persistence & B-Tree Logic)
-    [ ] L0: Briefing (ACID Compliance & Data Integrity)
-    [ ] L1: Mental Gym (Data Structures: B-Trees vs LSM-Trees)
-    [ ] L2: Scalable Scaffold (Database Schema Migration System)
-    [ ] L3: Deep Doing (Writing Raw SQL & Index Optimization)
-    [ ] L4: Hardware Debugger (SSD Write Cycles & File System Sync)
-
-[ ] MODUL 10: The Cipher Box (Security & CPU AES Instructions)
-    [ ] L0: Briefing (Encryption Standards & Threat Models)
-    [ ] L1: Mental Gym (Symmetric vs Asymmetric Cryptography)
-    [ ] L2: Scalable Scaffold (Secure Vault/Keyring Setup)
-    [ ] L3: Deep Doing (Implementing AES-GCM & Salting)
-    [ ] L4: Hardware Debugger (Constant-time Algorithms & CPU Cycles)
-
-[ ] MODUL 11: The Weather Refactor (SOLID & Clean Architecture)
-    [ ] L0: Briefing (Scalability & Technical Debt Assessment)
-    [ ] L1: Mental Gym (Dependency Inversion & Separation of Concerns)
-    [ ] L2: Scalable Scaffold (Feature-driven Directory Structure)
-    [ ] L3: Deep Doing (Refactoring Spaghetti to Clean Arch)
-    [ ] L4: Hardware Debugger (Memory Footprint after Refactor)
-
-### PHASE 5: THE HIGH-LEVEL BRIDGE (Advanced)
-[ ] MODUL 12: The C++ Interop (Dart FFI & Machine Code)
-    [ ] L0: Briefing (Performance Critical Modules)
-    [ ] L1: Mental Gym (Application Binary Interface - ABI)
-    [ ] L2: Scalable Scaffold (CMake/Native Build Pipeline)
-    [ ] L3: Deep Doing (Passing Pointers between Dart & C++)
-    [ ] L4: Hardware Debugger (Assembly Inspection & Instruction Sets)
-
-[ ] MODUL 13: The Canvas Artist (GPU Buffers & Rasterization)
-    [ ] L0: Briefing (Custom Shaders & High-Perf Graphics)
-    [ ] L1: Mental Gym (Graphics Pipeline: Vertex to Fragment)
-    [ ] L2: Scalable Scaffold (GLSL/Skia Shader Setup)
-    [ ] L3: Deep Doing (Writing Custom Shaders & Paint Logic)
-    [ ] L4: Hardware Debugger (GPU Draw Calls & Frame Time Analysis)
-
-[ ] MODUL 14: The Bulletproof Suite (TDD & Widget Testing)
-    [ ] L0: Briefing (Test Coverage vs Test Quality)
-    [ ] L1: Mental Gym (Mocking vs Faking vs Stubbing)
-    [ ] L2: Scalable Scaffold (CI Test Runner & Coverage Reports)
-    [ ] L3: Deep Doing (Writing Red-Green-Refactor Tests)
-    [ ] L4: Hardware Debugger (Integration Tests on Physical Devices)
-
-[ ] MODUL 15: The Cloud Voyager (CI/CD, Docker, & Global Infra)
-    [ ] L0: Briefing (Deployment Scalability & Reliability)
-    [ ] L1: Mental Gym (Containerization vs Virtualization)
-    [ ] L2: Scalable Scaffold (Dockerfile & GitHub Actions)
-    [ ] L3: Deep Doing (Orchestrating Multi-container Deployments)
+[ ] MODULE 04: The Synth Component (Atomic Design System) 
+[ ] L0: Briefing (Design Tokens & Component Specs) 
+[ ] L1: Mental Gym (Atomic Design Philosophy) 
+[ ] L2: Scalable Scaffold (Storybook/Widget Gallery Setup) 
+[ ] L3: Deep Doing (Building Primitives from Scratch) 
+[ ] L4: Hardware
