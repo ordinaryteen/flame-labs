@@ -70,7 +70,7 @@ Each module will be executed with this strict protocol:
 [x] L0: Briefing (Understanding OSI Layer & Request Lifecycle) 
 [x] L1: Mental Gym (Protocol Buffer vs JSON, Logic Flow) 
 [x] L2: Scalable Scaffold (Repo: `flame-labs/voyager-net`) 
-[ ] L3: Deep Doing (Manual Socket Creation & Syscall Tracing) 
+[x] L3: Deep Doing (Manual Socket Creation & Syscall Tracing) 
 [ ] L4: Hardware Debugger (Tracing NIC to Kernel Buffer)
 
 [ ] MODULE 02: The Digital Library (Memory & RAM Management) 
