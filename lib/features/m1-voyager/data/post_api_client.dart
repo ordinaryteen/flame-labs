@@ -15,6 +15,7 @@ void main() async {
     "body":
         "repudiandae veniam quaerat sunt sed\nalias aut fugiat sit autem sed est\nvoluptatem omnis possimus esse voluptatibus quis\nest aut tenetur dolor"
   });
+
   final response = await http.post(
     jsonUri,
     headers: header,
@@ -22,12 +23,29 @@ void main() async {
   );
 
   if (response.statusCode == 201) {
-    final responseBody = jsonDecode(response.body);
+    final responseBody =
+        PostModel.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
 
     print("--- DATABASE MUTATED SUCCESFULLY ---");
     print("Status: ${response.statusCode}");
-    print("Server response: ${responseBody}");
+    print("Server response: ${responseBody.body}");
   } else {
     print(response.statusCode);
+  }
+}
+
+class PostModel {
+  final int userId;
+  final String title;
+  final String body;
+
+  const PostModel(
+      {required this.userId, required this.title, required this.body});
+
+  factory PostModel.fromJson(Map<String, dynamic> jsonMap) {
+    return PostModel(
+        userId: jsonMap['userId'],
+        title: jsonMap['title'],
+        body: jsonMap['body']);
   }
 }
