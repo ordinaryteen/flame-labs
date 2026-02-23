@@ -26,7 +26,7 @@ void main() async {
 
     print("--- DATABASE MUTATED SUCCESFULLY ---");
     print("Status: ${response.statusCode}");
-    print("Server response: ${responseBody['id']}");
+    print("Server response: ${responseBody}");
   } else {
     print(response.statusCode);
   }
