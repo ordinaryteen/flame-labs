@@ -12,7 +12,6 @@ void main() async {
     return handler.next(options);
   }));
   try {
-    // The URL goes here! Not the token.
     final response = await dio.get('https://httpbin.org/bearer');
     print("Vault opened! Server says: ${response.data}");
     print("Status: ${response.statusCode}");
