@@ -71,7 +71,7 @@ Each module will be executed with this strict protocol:
 [x] L1: Mental Gym (Protocol Buffer vs JSON, Logic Flow) 
 [x] L2: Scalable Scaffold (Repo: `flame-labs/voyager-net`) 
 [x] L3: Deep Doing (Manual Socket Creation & Syscall Tracing) 
-[ ] L4: Hardware Debugger (Tracing NIC to Kernel Buffer)
+[x] L4: Hardware Debugger (Tracing NIC to Kernel Buffer)
 
 [ ] MODULE 02: The Digital Library (Memory & RAM Management) 
 [ ] L0: Briefing (Defining Memory Safety & Pointers) 

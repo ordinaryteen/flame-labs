@@ -7,7 +7,7 @@ import '../network/api_client.dart';
 List<UserProfile> _decodeUsersInBackground(List<dynamic> usersRawList) {
   print("\n[Core 2]: Decoding massive JSON string into Dart Objects...");
   // Simulate extreme parsing load
-  for (int i = 0; i < 5000000; i++) {}
+  for (int i = 0; i < 50000000; i++) {}
 
   return usersRawList.map((u) => UserProfile.fromJson(u)).toList();
 }

@@ -11,6 +11,7 @@ void main() async {
     }
     return handler.next(options);
   }));
+
   try {
     final response = await dio.get('https://httpbin.org/bearer');
     print("Vault opened! Server says: ${response.data}");

@@ -1,84 +1,114 @@
-import 'dart:convert';
-import 'package:dio/dio.dart';
-import 'dart:isolate';
+import 'dart:async';
+import 'dart:io';
 
-final String url = 'https://dummyjson.com/users';
-final String secretToken = "FLAME_OVERRIDE_99X";
+// ==========================================
+// 1. DATA MODELS (Fase 2: Generics & Casting)
+// ==========================================
 
-List<UserProfile> decodeUsers(String StringrawJson) {
-  List users = StringrawJson;
-  var listUser = users.map((u) => UserProfile.fromJson(u)).toList();
+// Wrapper untuk semua jenis pesanan
+class Order<T> {
+  final String orderId;
+  final T detail; // T bisa berupa Food atau Drink
+  final DateTime timestamp;
 
-  for (int i = 1; i <= 10000000; i++) {}
-
-  return listUser;
+  Order({required this.orderId, required this.detail})
+      : timestamp = DateTime.now();
 }
+
+class Food {
+  final String name;
+  Food(this.name);
+  @override
+  String toString() => "MAKANAN: $name";
+}
+
+class Drink {
+  final String name;
+  Drink(this.name);
+  @override
+  String toString() => "MINUMAN: $name";
+}
+
+// ==========================================
+// 2. KANTIN SERVICE (Fase 3: The Data Conduit)
+// ==========================================
+
+class KantinService {
+  // .broadcast() supaya banyak listener bisa dengerin pipa yang sama
+  final _orderController = StreamController<Order>.broadcast();
+
+  // Sink: Tempat masukin pesanan baru
+  StreamSink<Order> get orderSink => _orderController.sink;
+
+  // Stream: Ujung pipa buat didengerin
+  Stream<Order> get orderStream => _orderController.stream;
+
+  void dispose() {
+    _orderController.close();
+  }
+}
+
+// ==========================================
+// 3. MAIN EXECUTION (Simulation)
+// ==========================================
 
 void main() async {
-  final Dio dio = Dio();
+  final kantin = KantinService();
+  int orderCount = 1;
 
-  dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handlers) {
-    if (secretToken != null) {
-      options.headers['Authorization'] = 'Bearer $secretToken';
+  print("=== SELAMAT DATANG DI KANTIN DIGITAL ITS ===");
+  print("Format: 'makan:Nama' atau 'minum:Nama'");
+  print("Ketik 'exit' untuk menutup kantin.\n");
+
+  // --- LISTENER 1: Bagian Dapur (Cuma dengerin pesanan makanan) ---
+  kantin.orderStream.where((order) => order.detail is Food).listen((order) {
+    print("\n👨‍🍳 [DAPUR]: Siap! Memasak ${order.detail}");
+  });
+
+  // --- LISTENER 2: Bagian Barista (Cuma dengerin pesanan minuman) ---
+  kantin.orderStream.where((order) => order.detail is Drink).listen((order) {
+    print("\n☕ [BARISTA]: Siap! Membuat ${order.detail}");
+  });
+
+  // --- LISTENER 3: Bagian Kasir (Catat semua transaksi) ---
+  kantin.orderStream.listen((order) {
+    print(
+        "💰 [KASIR]: Mencatat pesanan #${order.orderId} pada ${order.timestamp}");
+  });
+
+  // --- SIMULASI INPUT USER SECARA REAL-TIME ---
+  // Kita pake loop biar program nungguin ketikan lo di terminal
+  while (true) {
+    stdout.write("> Masukkan Pesanan: ");
+    String? input = stdin.readLineSync();
+
+    if (input == null || input.toLowerCase() == 'exit') {
+      print("\nKantin tutup. Sampai jumpa!");
+      break;
     }
-    return handlers.next(options);
-  }));
 
-  try {
-    final response = await dio.get(url);
+    // Parsing input sederhana (makan:Nasi atau minum:Es)
+    if (input.contains(':')) {
+      var parts = input.split(':');
+      var type = parts[0].trim().toLowerCase();
+      var name = parts[1].trim();
 
-    if (response.statusCode == 200) {
-      List users = response.data['users'];
-      // var listUser = decodeUsers(users);
-      var listUser = await Isolate.run(() => decodeUsers(users));
-
-      for (int i = 1; i <= 5; i++) {
-        print("[CPU Core 1 - UI Thread]: Drawing Frame $i 🟢");
-      }
-
-      for (int i = 1; i <= 5; i++) {
-        print(listUser[i].firstName);
-      }
-    } else {
-      print("what the dawg doin ${response.statusCode}");
-    }
-  } catch (e) {
-    if (e is DioException) {
-      if (e.response?.statusCode == 401) {
-        print(
-            "CRITICAL: JWT Token Invalid or Missing! Booting user to Login Screen.");
+      if (type == 'makan') {
+        kantin.orderSink
+            .add(Order(orderId: "ORD-${orderCount++}", detail: Food(name)));
+      } else if (type == 'minum') {
+        kantin.orderSink
+            .add(Order(orderId: "ORD-${orderCount++}", detail: Drink(name)));
       } else {
-        print("Other DioError: $e");
+        print("❌ Format salah! Gunakan makan: atau minum:");
       }
     } else {
-      print("Unknown Error: $e");
+      print("❌ Format salah! Contoh: makan:Geprek");
     }
+
+    // Kasih delay dikit biar output Stream muncul rapi
+    await Future.delayed(Duration(milliseconds: 100));
   }
-}
 
-class UserProfile {
-  final int id;
-  final String firstName;
-  final Company company;
-
-  UserProfile(
-      {required this.id, required this.firstName, required this.company});
-
-  factory UserProfile.fromJson(Map<String, dynamic> jsonMap) {
-    return UserProfile(
-        id: jsonMap['id'],
-        firstName: jsonMap['firstName'],
-        company: Company.fromJson(jsonMap['company']));
-  }
-}
-
-class Company {
-  final String name;
-  final String title;
-
-  Company({required this.name, required this.title});
-
-  factory Company.fromJson(Map<String, dynamic> jsonMap) {
-    return Company(name: jsonMap['name'], title: jsonMap['title']);
-  }
+  kantin.dispose();
 }
