@@ -1,4 +1,4 @@
-import 'package:flame_labs/features/m2-synth/views/pages/testing_page.dart';
+import 'package:flame_labs/archive/features/m2-synth/views/pages/testing_page.dart';
 import 'package:flutter/material.dart';
 
 class SettingPage extends StatefulWidget {

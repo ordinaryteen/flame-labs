@@ -6,9 +6,8 @@ void main() async {
   String? jwtToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpCJ9";
 
   dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {
-    if (jwtToken != null) {
-      options.headers['Authorization'] = 'Bearer $jwtToken';
-    }
+    options.headers['Authorization'] = 'Bearer $jwtToken';
+
     return handler.next(options);
   }));
 

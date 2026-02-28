@@ -1,4 +1,3 @@
-import 'dart:isolate';
 import 'dart:convert';
 import 'package:dio/dio.dart';
 
@@ -23,7 +22,6 @@ void main() async {
   print("\n--- INITIATING HEAVY DECODE ---");
 
   // TODO 1. The Block (Old Way - Core 1 does everything)
-  final parsedData = heavyJsonParsing(rawStringResponse);
 
   // TODO 2. The Isolate (New Way - Handing it to Core 2)
   // final parsedData =

@@ -1,0 +1,3 @@
+sealed class ProductEvent {}
+
+class GetProductEvent extends ProductEvent {}

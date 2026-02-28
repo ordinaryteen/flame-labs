@@ -1,5 +1,5 @@
-import 'package:flame_labs/features/m2-synth/data/constants.dart';
-import 'package:flame_labs/features/m2-synth/views/widgets/hero_widget.dart';
+import 'package:flame_labs/archive/features/m2-synth/data/constants.dart';
+import 'package:flame_labs/archive/features/m2-synth/views/widgets/hero_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 

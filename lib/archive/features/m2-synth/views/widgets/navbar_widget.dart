@@ -1,4 +1,4 @@
-import 'package:flame_labs/features/m2-synth/data/notifiers.dart';
+import 'package:flame_labs/archive/features/m2-synth/data/notifiers.dart';
 import 'package:flutter/material.dart';
 
 class NavbarWidget extends StatelessWidget {

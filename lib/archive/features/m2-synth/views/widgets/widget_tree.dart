@@ -1,4 +1,4 @@
-import 'package:flame_labs/features/m2-synth/data/constants.dart';
+import 'package:flame_labs/archive/features/m2-synth/data/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../pages/home_page.dart';
