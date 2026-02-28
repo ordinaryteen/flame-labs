@@ -1,0 +1,84 @@
+# 🛒 PRD: Shopee Lite (E-Commerce Clone)
+
+**Goal:** Build a Play Store-quality, fully functional e-commerce app integrating a real public API (FakeStoreAPI) with local offline databases for cart and order history. The app is divided into 3 development phases: UI, Architecture (BLoC + DB), and AI Agent integration.
+
+---
+
+## 🎯 FEATURE LOCK & SCOPE
+
+### 1. The Global Data Source (The Store)
+*   **API:** `https://fakestoreapi.com/products`
+*   **Behavior:** The app will fetch the global product catalog (clothing, electronics, jewelry) purely for reading. We will not send any data *to* this API. 
+
+### 2. The Local Data Source (The User)
+*   **Database:** Local NoSQL or SQLite (e.g., `Hive` or `Isar`).
+*   **Behavior:** The user's Cart and Order History live entirely on their phone. When a user buys something, it is stored locally.
+
+---
+
+## 📱 SCREEN ARCHITECTURE & FLOW
+
+The app is framed by a `BottomNavigationBar` containing 3 main tabs:
+
+### Tab 1: Beranda (Home Screen)
+*   **Header:** Iconic orange AppBar with a Search Bar (dummy) and a dynamic Cart Icon with a red notification badge (shows count of items).
+*   **Flash Sale Section:** A horizontal `ListView` showing 5 products. Price is artificially slashed by 50% in the UI logic.
+*   **Rekomendasi Section:** A 2-column `GridView` showing 15-20 products fetched from the API. Clicking a product opens the Detail Screen.
+
+### Tab 2: Notifikasi (Notifications)
+*   A static, vertical list showing "Promo Shopee" and "Info Shopee".
+*   An empty state illustration below it with a "Belanja Sekarang" button that routes the user back to Beranda.
+
+### Tab 3: Saya (Profile & Navigation Screen)
+*   **Header:** Orange profile header with Avatar and Username.
+*   **Pesanan Saya (My Orders):** A clickable row (Belum Bayar, Dikemas, Dikirim). Clicking this routes to a *new, dedicated Order History screen* (detailed below).
+*   **Menu List:** A static vertical list for settings, help center, and vouchers.
+
+### Sub-Screen A: Product Detail (Triggered from Beranda)
+*   Large product image (top half).
+*   Product title, rating, and description (from API) below it.
+*   **Bottom Bar:** "Masukkan Keranjang" (Add to Cart) and "Beli Sekarang" (Buy Now) buttons. Clicking adds the item to the local database and triggers a BLoC event to update the Cart badge on Beranda.
+
+### Sub-Screen B: Keranjang Saya (The Cart)
+*   Accessed via the top-right Cart icon on Beranda.
+*   Vertical list of products saved in the local DB.
+*   "+" and "-" buttons to adjust quantity. Checkboxes to select items.
+*   **Bottom Checkout Bar:** Dynamically calculates total price of strictly *checked* items. Clicking "Checkout" moves selected items to the "Pesanan Saya" (Order History) database and clears them from the cart.
+
+### Sub-Screen C: Pesanan Saya (Order History)
+*   Accessed via the Profile Screen tab.
+*   A tabbed view (`Belum Bayar`, `Dikemas`, `Dikirim`, `Selesai`).
+*   Instead of implementing complex payment gateways, all checked-out items will automatically bypass and land in the `Selesai` (Completed) tab.
+*   Shows a vertical list of past purchased receipts reading from the local database.
+
+---
+
+## 🏗️ VERTICAL SLICE DEVELOPMENT PLAN (BEST PRACTICE)
+
+Forget horizontal layers (building all UI first, then all logic). We will use real Software Engineering best practices: **Feature-Driven Development (Vertical Slicing)**. We build one complete feature from bottom (Data) to top (UI) before moving to the next.
+
+### Slice 1: The Product Catalog (Beranda)
+*   **Data:** Build the `ProductModel`. Set up `Dio` to fetch from `FakeStoreAPI`.
+*   **Domain:** Define `GetProductsUseCase`.
+*   **BLoC:** Build `ProductBloc` (Loading, Loaded, Error states).
+*   **UI:** Paint the Beranda screen, consuming the BLoC to show the `GridView` and `Flash Sale` sliders.
+
+### Slice 2: The Local Cart System
+*   **Data:** Set up `Hive` local database. Build `CartModel`. 
+*   **Domain:** Define `AddToCartUseCase`, `UpdateCartQuantityUseCase`, `GetCartUseCase`.
+*   **BLoC:** Build `CartBloc` to track items and dynamically calculate the Total Rp. 
+*   **UI:** Paint the `Keranjang Saya` screen. Connect buttons to BLoC. Make the top-bar notification badge react dynamically.
+
+### Slice 3: The Checkout & Order History
+*   **Domain:** Define `CheckoutUseCase` (moves items from Cart DB to Orders DB and stamps with current date).
+*   **BLoC:** Build `OrderBloc`.
+*   **UI:** Paint the `Pesanan Saya` tabbed history screen to display the purchased items.
+
+### Slice 4: The "Tanya AI" Assistant (Agent Integration)
+*   **Data:** Connect strictly to the DeepSeek API.
+*   **Domain:** Define the "Tool/Function Map" exposing our existing Use Cases to the AI.
+*   **UI:** Add a floating chat interface. 
+*   **Flow:** When user types "Kosongin keranjang gue" -> DeepSeek returns JSON `{"tool": "clearCart"}` -> App intercepts JSON and fires the `CartBloc` event -> UI clears instantly.
+
+---
+**STATUS:** PRD Revised for Vertical Slicing. Ready to begin Slice 1: The Product Catalog!
