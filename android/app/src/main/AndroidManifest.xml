@@ -2,9 +2,9 @@
     <!-- The INTERNET permission is physically required for the app to access the Wi-Fi card! -->
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
-        android:label="flame_labs"
+        android:label="She Is Pretty"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"
