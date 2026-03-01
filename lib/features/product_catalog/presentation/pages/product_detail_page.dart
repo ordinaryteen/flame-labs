@@ -31,7 +31,7 @@ class ProductDetailPage extends StatelessWidget {
           children: [
             Container(
               width: double.infinity,
-              height: 350,
+              height: 370,
               padding: const EdgeInsets.all(16),
               color: Colors.white,
               child: Image.network(
@@ -42,7 +42,7 @@ class ProductDetailPage extends StatelessWidget {
             Container(
               width: double.infinity,
               color: Colors.white,
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.only(left: 12, right: 12, top: 20),
               child: Text(
                 '\$ ${product.price}',
                 style: const TextStyle(
@@ -52,14 +52,25 @@ class ProductDetailPage extends StatelessWidget {
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.only(left: 12.0),
+              child: Row(
+                children: [
+                  Text('${product.rating.rate} / 5.0'),
+                  const SizedBox(width: 8),
+                  Text('(${product.rating.count} reviews)'),
+                ],
+              ),
+            ),
             Container(
               width: double.infinity,
               color: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: const EdgeInsets.only(
+                  left: 12, right: 12, top: 10, bottom: 20),
               child: Text(
                 product.title,
                 style: const TextStyle(
-                  fontSize: 16,
+                  fontSize: 20,
                   fontWeight: FontWeight.w600,
                 ),
               ),

@@ -4,20 +4,22 @@ import 'package:flutter/material.dart';
 
 class ProductGrid extends StatelessWidget {
   final List<ProductEntity> products;
-  const ProductGrid({Key? key}) : super(key: key);
+
+  const ProductGrid({Key? key, required this.products}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
         padding: const EdgeInsets.all(10),
-        itemCount: state.products.length,
+        // We use our local variable `products` instead of the old `state.products`
+        itemCount: products.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio: 0.8,
             crossAxisSpacing: 8,
             mainAxisSpacing: 8),
         itemBuilder: (context, index) {
-          final singleProduct = state.products[index];
+          final singleProduct = products[index];
 
           return ProductCard(product: singleProduct);
         });
